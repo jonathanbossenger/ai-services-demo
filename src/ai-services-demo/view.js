@@ -55,6 +55,7 @@ const initChat = (root) => {
         appendMsg('user', text);
         input.value = '';
         setBusy(true);
+        console.log('Nonce', window.aiServicesDemo?.nonce || 'empty nonce');
         try {
             const res = await fetch(window.aiServicesDemo?.restUrl || '/wp-json/ai-services-demo/v1/chat', {
                 method: 'POST',
@@ -68,6 +69,7 @@ const initChat = (root) => {
             const data = await res.json();
             appendMsg('assistant', data?.reply || '');
         } catch (err) {
+            console.error('Error fetching AI response:', err);
             appendMsg('assistant', 'Sorry, something went wrong.');
         } finally {
             setBusy(false);

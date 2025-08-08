@@ -13,6 +13,8 @@
  * @package Jonathanbossenger
  */
 
+define( 'PLUGIN_URL', trailingslashit( plugin_dir_url(__FILE__) ) );
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -62,12 +64,28 @@ add_action( 'init', 'jonathanbossenger_ai_services_demo_block_init' );
  * Localize data for the frontend view script of our block.
  */
 function jonathanbossenger_ai_services_demo_enqueue_data() {
+	wp_enqueue_script(
+		'ai-services-index',
+		PLUGIN_URL . 'javascript/index.js',
+		array( 'wp-api' ),
+		'1.0.0',
+		true
+	);
+	wp_localize_script(
+		'ai-services-index',
+		'aiServicesDemo',
+		array(
+			'restUrl' => rest_url( 'ai-services-demo/v1/chat' ),
+			'nonce'   => wp_create_nonce( 'wp_rest' ),
+		)
+	);
+	/*
 	// Find the built view script handle from the asset file.
 	$asset = __DIR__ . '/build/ai-services-demo/view.asset.php';
 	if ( file_exists( $asset ) ) {
 		$asset_data = include $asset;
-		$handle    = 'ai-services-demo-view-script';
-		wp_register_script( $handle, plugins_url( 'build/ai-services-demo/view.js', __FILE__ ), $asset_data['dependencies'] ?? array(), $asset_data['version'] ?? null, true );
+		$handle    = 'jonathanbossenger-ai-services-demo-view';
+		// wp_register_script( $handle, plugins_url( 'build/ai-services-demo/view.js', __FILE__ ), $asset_data['dependencies'] ?? array(), $asset_data['version'] ?? null, true );
 		wp_localize_script(
 			$handle,
 			'aiServicesDemo',
@@ -77,6 +95,7 @@ function jonathanbossenger_ai_services_demo_enqueue_data() {
 			)
 		);
 	}
+	*/
 }
 add_action( 'wp_enqueue_scripts', 'jonathanbossenger_ai_services_demo_enqueue_data' );
 
