@@ -1,0 +1,26 @@
+<?php
+// This file is generated. Do not modify it manually.
+return array(
+	'ai-services-demo' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'jonathanbossenger/ai-services-demo',
+		'version' => '0.1.0',
+		'title' => 'Ai Services Demo',
+		'category' => 'widgets',
+		'icon' => 'smiley',
+		'description' => 'Example block scaffolded with Create Block tool.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'ai-services-demo',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'render' => 'file:./render.php'
+	)
+);

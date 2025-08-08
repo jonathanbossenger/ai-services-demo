@@ -1,0 +1,77 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-jonathanbossenger-ai-services-demo {
+	background: transparent;
+	color: inherit;
+	padding: 0;
+}
+
+.wp-block-jonathanbossenger-ai-services-demo .ai-chat {
+	border: 1px solid var(--wp--preset--color--contrast-3, #ddd);
+	border-radius: 8px;
+	padding: 12px;
+	max-width: 720px;
+	margin-inline: auto;
+}
+
+.ai-chat__messages {
+	max-height: 420px;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 8px;
+	background: var(--wp--preset--color--base-2, #fafafa);
+	border-radius: 6px;
+	margin-bottom: 12px;
+}
+
+.ai-chat__message {
+	padding: 10px 12px;
+	border-radius: 14px;
+	max-width: 85%;
+	width: fit-content;
+	line-height: 1.35;
+	white-space: pre-wrap;
+}
+
+.ai-chat__message--user {
+	align-self: flex-end;
+	background: var(--wp--preset--color--primary, #21759b);
+	color: #fff;
+}
+
+.ai-chat__message--assistant {
+	align-self: flex-start;
+	background: #fff;
+	border: 1px solid var(--wp--preset--color--contrast-3, #ddd);
+}
+
+.ai-chat__form {
+	display: flex;
+	gap: 8px;
+}
+
+.ai-chat__input {
+	flex: 1;
+	resize: vertical;
+	padding: 10px;
+	border-radius: 6px;
+	border: 1px solid var(--wp--preset--color--contrast-3, #ddd);
+	font: inherit;
+}
+
+.ai-chat__send {
+	padding: 10px 14px;
+	border-radius: 6px;
+	border: 1px solid var(--wp--preset--color--contrast-3, #ddd);
+	background: var(--wp--preset--color--primary, #21759b);
+	color: #fff;
+	font: inherit;
+	cursor: pointer;
+}
