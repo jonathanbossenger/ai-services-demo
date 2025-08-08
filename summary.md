@@ -136,7 +136,7 @@ Server-side AI call (service-agnostic)
   - Checks `has_available_services( [ 'capabilities' => [ AI_Capability::TEXT_GENERATION ] ] )`.
   - Fetches with `get_available_service( [ 'capabilities' => [ AI_Capability::TEXT_GENERATION ] ] )`.
 - Gets a model:
-  - `$model = $service->get_model( [ 'feature' => 'ai-services-demo/chat', 'capabilities' => [ AI_Capability::TEXT_GENERATION ] ] );`
+  - `$model = $service->get_model( [ 'feature' => 'ai-services-demo-chat', 'capabilities' => [ AI_Capability::TEXT_GENERATION ] ] );`
   - Uses a stable `feature` id for attribution/observability.
 - Generates a reply (single-turn):
   - `$candidates = $model->generate_text( $message );`

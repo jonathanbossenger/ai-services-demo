@@ -154,7 +154,7 @@ function jonathanbossenger_ai_services_demo_handle_chat( WP_REST_Request $reques
 
 		// Get a model for our feature.
 		$model = $service->get_model( array(
-			'feature'      => 'ai-services-demo/chat',
+			'feature'      => 'ai-services-demo-chat',
 			'capabilities' => array( \Felix_Arntz\AI_Services\Services\API\Enums\AI_Capability::TEXT_GENERATION ),
 		) );
 
