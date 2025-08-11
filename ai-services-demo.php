@@ -18,6 +18,8 @@ define( 'PLUGIN_URL', trailingslashit( plugin_dir_url(__FILE__) ) );
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+add_action( 'init', 'jonathanbossenger_ai_services_demo_block_init' );
 /**
  * Registers the block using a `blocks-manifest.php` file, which improves the performance of block type registration.
  * Behind the scenes, it also registers all assets so they can be enqueued
@@ -58,47 +60,23 @@ function jonathanbossenger_ai_services_demo_block_init() {
 		register_block_type( __DIR__ . "/build/{$block_type}" );
 	}
 }
-add_action( 'init', 'jonathanbossenger_ai_services_demo_block_init' );
 
+add_action( 'wp_enqueue_scripts', 'jonathanbossenger_ai_services_demo_enqueue_data' );
 /**
  * Localize data for the frontend view script of our block.
  */
 function jonathanbossenger_ai_services_demo_enqueue_data() {
-	wp_enqueue_script(
-		'ai-services-index',
-		PLUGIN_URL . 'javascript/index.js',
-		array( 'wp-api' ),
-		'1.0.0',
-		true
-	);
 	wp_localize_script(
-		'ai-services-index',
+		'jonathanbossenger-ai-services-demo-view-script',
 		'aiServicesDemo',
 		array(
 			'restUrl' => rest_url( 'ai-services-demo/v1/chat' ),
 			'nonce'   => wp_create_nonce( 'wp_rest' ),
 		)
 	);
-	/*
-	// Find the built view script handle from the asset file.
-	$asset = __DIR__ . '/build/ai-services-demo/view.asset.php';
-	if ( file_exists( $asset ) ) {
-		$asset_data = include $asset;
-		$handle    = 'jonathanbossenger-ai-services-demo-view';
-		// wp_register_script( $handle, plugins_url( 'build/ai-services-demo/view.js', __FILE__ ), $asset_data['dependencies'] ?? array(), $asset_data['version'] ?? null, true );
-		wp_localize_script(
-			$handle,
-			'aiServicesDemo',
-			array(
-				'restUrl' => rest_url( 'ai-services-demo/v1/chat' ),
-				'nonce'   => wp_create_nonce( 'wp_rest' ),
-			)
-		);
-	}
-	*/
 }
-add_action( 'wp_enqueue_scripts', 'jonathanbossenger_ai_services_demo_enqueue_data' );
 
+add_action( 'rest_api_init', 'jonathanbossenger_ai_services_demo_register_rest_routes' );
 /**
  * Register REST API route for chat messages.
  */
@@ -123,7 +101,6 @@ function jonathanbossenger_ai_services_demo_register_rest_routes() {
 		)
 	);
 }
-add_action( 'rest_api_init', 'jonathanbossenger_ai_services_demo_register_rest_routes' );
 
 /**
  * Handle chat requests using the AI Services plugin, service-agnostic.
