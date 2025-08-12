@@ -30,12 +30,27 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit() {
+	const instanceId = 'ai-services-demo-editor';
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Ai Services Demo – hello from the editor!',
-				'ai-services-demo'
-			) }
-		</p>
+		<div className="wp-block-jonathanbossenger-ai-services-demo" data-instance={instanceId}>
+			<div className="ai-chat" id={instanceId}>
+				<div className="ai-chat__messages" aria-live="polite"></div>
+				<form className="ai-chat__form" method="post" action="#" onSubmit={e => e.preventDefault()}>
+					<label className="screen-reader-text" htmlFor={`${instanceId}-input`}>
+						{__('Message', 'ai-services-demo')}
+					</label>
+					<textarea
+						className="ai-chat__input"
+						id={`${instanceId}-input`}
+						rows="3"
+						placeholder={__('Type your message…', 'ai-services-demo')}
+					></textarea>
+					<button type="submit" className="ai-chat__send">
+						{__('Send', 'ai-services-demo')}
+					</button>
+				</form>
+				<noscript>{__('JavaScript is required to use this chat.', 'ai-services-demo')}</noscript>
+			</div>
+		</div>
 	);
 }
