@@ -32,10 +32,17 @@ const initChat = (root) => {
     const messagesEl = root.querySelector('.ai-chat__messages');
     const form = root.querySelector('.ai-chat__form');
     const input = root.querySelector('.ai-chat__input');
+    const loadingEl = root.querySelector('.ai-chat__loading');
 
     if (!messagesEl || !form || !input) return;
 
+    // Move loading animation above textarea and button
+    if (loadingEl && form.parentNode !== null) {
+        form.parentNode.insertBefore(loadingEl, form);
+    }
+
     const appendMsg = (role, text) => {
+        if (loadingEl) loadingEl.style.display = 'none';
         const msg = document.createElement('div');
         msg.className = `ai-chat__message ai-chat__message--${role}`;
         msg.textContent = text;
@@ -46,6 +53,7 @@ const initChat = (root) => {
     const setBusy = (busy) => {
         form.querySelector('button[type="submit"]').disabled = !!busy;
         input.disabled = !!busy;
+        if (loadingEl) loadingEl.style.display = busy ? '' : 'none';
     };
 
     form.addEventListener('submit', async (e) => {

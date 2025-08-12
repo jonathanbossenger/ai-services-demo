@@ -19,7 +19,12 @@ $instance_id = 'ai-services-demo-' . wp_generate_uuid4();
 ?>
 <div class="wp-block-jonathanbossenger-ai-services-demo" data-instance="<?php echo esc_attr( $instance_id ); ?>">
     <div class="ai-chat" id="<?php echo esc_attr( $instance_id ); ?>">
-        <div class="ai-chat__messages" aria-live="polite"></div>
+        <div class="ai-chat__messages" aria-live="polite">
+            <div class="ai-chat__loading" style="display:none;">
+                <span class="ai-chat__spinner" aria-label="Loading"></span>
+                <span class="ai-chat__loading-text">Loading...</span>
+            </div>
+        </div>
         <form class="ai-chat__form" method="post" action="#" onsubmit="return false;">
             <label class="screen-reader-text"
                 for="<?php echo esc_attr( $instance_id ); ?>-input"><?php esc_html_e( 'Message', 'ai-services-demo' ); ?></label>
